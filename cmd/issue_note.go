@@ -27,7 +27,7 @@ var issueCreateNoteCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		msgs, err := cmd.Flags().GetStringSlice("message")
+		msgs, err := cmd.Flags().GetStringArray("message")
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -94,7 +94,7 @@ func noteText() (string, error) {
 }
 
 func init() {
-	issueCreateNoteCmd.Flags().StringSliceP("message", "m", []string{}, "Use the given <msg>; multiple -m are concatenated as separate paragraphs")
+	issueCreateNoteCmd.Flags().StringArrayP("message", "m", []string{}, "Use the given <msg>; multiple -m are concatenated as separate paragraphs")
 
 	issueCreateNoteCmd.MarkZshCompPositionalArgumentCustom(1, "__lab_completion_remote")
 	issueCreateNoteCmd.MarkZshCompPositionalArgumentCustom(2, "__lab_completion_issue $words[2]")

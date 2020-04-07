@@ -30,7 +30,7 @@ var mrCreateCmd = &cobra.Command{
 }
 
 func init() {
-	mrCreateCmd.Flags().StringSliceP("message", "m", []string{}, "Use the given <msg>; multiple -m are concatenated as separate paragraphs")
+	mrCreateCmd.Flags().StringArrayP("message", "m", []string{}, "Use the given <msg>; multiple -m are concatenated as separate paragraphs")
 	mrCreateCmd.Flags().StringP("assignee", "a", "", "Set assignee by username")
 	mrCreateCmd.Flags().StringSliceP("label", "l", []string{}, "Add label <label>; can be specified multiple times for multiple labels")
 	mrCreateCmd.Flags().BoolP("remove-source-branch", "d", false, "Remove source branch from remote after merge")
@@ -64,7 +64,7 @@ func getAssigneeID(assignee string) *int {
 }
 
 func runMRCreate(cmd *cobra.Command, args []string) {
-	msgs, err := cmd.Flags().GetStringSlice("message")
+	msgs, err := cmd.Flags().GetStringArray("message")
 	if err != nil {
 		log.Fatal(err)
 	}
